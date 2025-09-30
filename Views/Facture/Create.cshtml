@@ -1,0 +1,107 @@
+@model FacturationApp.Models.ViewModels.FactureCreateVM
+@{
+    ViewData["Title"] = "Créer une nouvelle facture";
+}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<div class="container mt-4 ">
+    <h1>Créer une nouvelle facture</h1>
+
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label for="ClientId">Nom du Client</label>
+                    <select asp-for="ClientId" asp-items="@(new SelectList(ViewBag.Clients, "Id", "Nom"))" 
+                            class="form-control" required>
+                        <option value="">-- Sélectionner un client --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group mb-3">
+                    <label asp-for="Tva">TVA (%)</label>
+                    <input asp-for="Tva" type="number" step="0.01" class="form-control" required />
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="form-group mb-3">
+                    <label asp-for="Remise">Remise (%)</label>
+                    <input asp-for="Remise" type="number" step="0.01" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <h3>Lignes de facture</h3>
+        <table class="table table-bordered">
+            <thead class="table-light">
+                <tr>
+                    <th>Produit</th>
+                    <th>Quantité</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="lignes-table-body">
+                <tr>
+                    <td>
+                        <select name="Lignes[0].ProduitId" class="form-control">
+                            @foreach (var p in ViewBag.Produits)
+                            {
+                                <option value="@p.Id">@p.Nom</option>
+                            }
+                        </select>
+                    </td>
+                    <td>
+                        <input name="Lignes[0].Quantite" type="number" value="1" class="form-control" required />
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger remove-ligne">Supprimer</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button type="button" class="btn btn-primary" id="add-ligne">Ajouter une ligne</button>
+        <button type="submit" class="btn btn-success">Créer la Facture</button>
+        <a href="/Facture/Index" class="btn btn-secondary">Retour à la liste</a>
+    </form>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    let ligneIndex = 1;
+
+    document.getElementById('add-ligne').addEventListener('click', function () {
+        const tbody = document.getElementById('lignes-table-body');
+        const newRow = document.createElement('tr');
+        newRow.innerHTML = `
+            <td>
+                <select name="Lignes[${ligneIndex}].ProduitId" class="form-control">
+                    @foreach (var p in ViewBag.Produits)
+                    {
+                        <option value="@p.Id">@p.Nom</option>
+                    }
+                </select>
+            </td>
+            <td>
+                <input name="Lignes[${ligneIndex}].Quantite" type="number" value="1" class="form-control" required />
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger remove-ligne">Supprimer</button>
+            </td>
+        `;
+        tbody.appendChild(newRow);
+        ligneIndex++;
+    });
+
+    document.getElementById('lignes-table-body').addEventListener('click', function (e) {
+        if (e.target && e.target.classList.contains('remove-ligne')) {
+            e.target.closest('tr').remove();
+        }
+    });
+});
+</script>

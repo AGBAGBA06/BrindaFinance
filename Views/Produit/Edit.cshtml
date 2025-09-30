@@ -1,0 +1,10 @@
+@model FacturationApp.Models.Produit
+<h2>Modifier Produit</h2>
+<form method="post">
+    <input type="hidden" asp-for="Id" />
+    <p>Nom: <input asp-for="Nom" /></p>
+    <p>Prix unitaire: <input asp-for="PrixUnitaire" /></p>
+    <p>Stock: <input asp-for="Stock" /></p>
+    <button type="submit">Enregistrer</button>
+</form>
+<a href="/Produit/Index">Retour à la liste</a>

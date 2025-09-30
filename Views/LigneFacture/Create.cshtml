@@ -1,0 +1,13 @@
+@model FacturationApp.Models.LigneFacture
+<h2>Ajouter Ligne de Facture</h2>
+<form method="post">
+    <p>Facture:
+        <select asp-for="FactureId" asp-items="@(new SelectList(ViewBag.Factures, "Id", "Numero"))"></select>
+    </p>
+    <p>Produit:
+        <select asp-for="ProduitId" asp-items="@(new SelectList(ViewBag.Produits, "Id", "Nom"))"></select>
+    </p>
+    <p>Quantité: <input asp-for="Quantite" /></p>
+    <button type="submit">Ajouter</button>
+</form>
+<a href="/LigneFacture/Index">Retour à la liste</a>

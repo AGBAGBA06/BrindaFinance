@@ -1,0 +1,35 @@
+@model IEnumerable<FacturationApp.Models.Client>
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2>Clients</h2>
+        <a href="/Client/Create" class="btn btn-success">Ajouter un Client</a>
+    </div>
+
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Téléphone</th>
+                <th>Adresse</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var client in Model)
+            {
+                <tr>
+                    <td>@client.Nom</td>
+                    <td>@client.Email</td>
+                    <td>@client.Telephone</td>
+                    <td>@client.Adresse</td>
+                    <td>
+                        <a href="/Client/Edit/@client.Id" class="btn btn-sm btn-primary">Modifier</a>
+                        <a href="/Client/Delete/@client.Id" class="btn btn-sm btn-danger">Supprimer</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

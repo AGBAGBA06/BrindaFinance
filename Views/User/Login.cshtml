@@ -1,0 +1,9 @@
+@model FacturationApp.Models.ViewModels.LoginViewModel
+
+<h2>Connexion</h2>
+<form asp-action="Login" method="post">
+    <p>Email: <input asp-for="Email" /></p>
+    <p>Mot de passe: <input asp-for="Password" type="password" /></p>
+    <p><input asp-for="RememberMe" type="checkbox" /> Se souvenir de moi</p>
+    <button type="submit">Se connecter</button>
+</form>

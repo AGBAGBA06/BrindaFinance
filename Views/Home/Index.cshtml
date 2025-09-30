@@ -1,0 +1,30 @@
+﻿@* @{
+    ViewData["Title"] = "Home Page";
+} *@
+
+@{
+    ViewData["Title"] = "Accueil";
+}
+
+<div class="position-relative vh-100" style="overflow: hidden;">
+    <!-- SVG de fond -->
+    <svg class="position-absolute top-0 start-0 w-100 h-100" preserveAspectRatio="none" viewBox="0 0 1440 320" style="z-index: -1;">
+        <path fill="#5d9fc5" fill-opacity="0.7" d="M0,64L48,69.3C96,75,192,85,288,117.3C384,149,480,203,576,224C672,245,768,235,864,224C960,213,1056,203,1152,192C1248,181,1344,171,1392,165.3L1440,160L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"></path>
+    </svg>
+
+    <div class="d-flex flex-column justify-content-center align-items-center vh-100 text-center text-white">
+        <h1 class="display-3 fw-bold">Bienvenue dans votre application de facturation</h1>
+        <p class="lead mb-4"> 
+git add .
+git commit -m "premier commit" 
+git branch -M main 
+git remote add origine https://github.com/AGBAGBA06/BrindaFinace.git
+ git push -u origine main
+
+        Gérez vos clients, vos factures et vos produits facilement.</p>
+        <div>
+            <a href="/Client/Index" class="btn btn-light btn-lg me-2">Clients</a>
+            <a href="/Facture/Index" class="btn btn-outline-light btn-lg">Factures</a>
+        </div>
+    </div>
+</div>

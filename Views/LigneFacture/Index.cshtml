@@ -1,0 +1,25 @@
+@model IEnumerable<FacturationApp.Models.LigneFacture>
+<h2>Lignes de Facture</h2>
+<a href="/LigneFacture/Create">Ajouter Ligne</a>
+<table border="1" cellpadding="5">
+    <tr>
+        <th>Facture</th>
+        <th>Produit</th>
+        <th>Quantité</th>
+        <th>Prix Total</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var l in Model)
+    {
+        <tr>
+            <td>@l.Facture.Numero</td>
+            <td>@l.Produit.Nom</td>
+            <td>@l.Quantite</td>
+            <td>@l.PrixTotal</td>
+            <td>
+                <a href="/LigneFacture/Edit/@l.Id">Modifier</a> |
+                <a href="/LigneFacture/Delete/@l.Id">Supprimer</a>
+            </td>
+        </tr>
+    }
+</table>

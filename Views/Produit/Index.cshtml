@@ -1,0 +1,23 @@
+@model IEnumerable<FacturationApp.Models.Produit>
+<h2>Produits</h2>
+<a href="/Produit/Create">Ajouter un Produit</a>
+<table border="1" cellpadding="5">
+    <tr>
+        <th>Nom</th>
+        <th>Prix</th>
+        <th>Stock</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var produit in Model)
+    {
+        <tr>
+            <td>@produit.Nom</td>
+            <td>@produit.PrixUnitaire</td>
+            <td>@produit.Stock</td>
+            <td>
+                <a href="/Produit/Edit/@produit.Id">Modifier</a> |
+                <a href="/Produit/Delete/@produit.Id">Supprimer</a>
+            </td>
+        </tr>
+    }
+</table>

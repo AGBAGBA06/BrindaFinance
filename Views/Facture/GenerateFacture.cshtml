@@ -1,0 +1,94 @@
+@model FacturationApp.Models.Facture
+
+<div class="card">
+  <div class="card-body">
+    <div class="container mb-5 mt-3">
+      <div class="row d-flex align-items-baseline">
+        <div class="col-xl-9">
+          <p style="color: #7e8d9f;font-size: 20px;">
+            Facture >> <strong>@Model.Numero</strong>
+          </p>
+        </div>
+        <div class="col-xl-3 float-end">
+          <a onclick="window.print()" class="btn btn-light border-0">
+            <i class="fas fa-print text-primary"></i> Imprimer
+          </a>
+        </div>
+        <hr />
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-8">
+            <ul class="list-unstyled">
+              <li class="text-muted">Client: 
+                <span style="color:#5d9fc5 ;">@Model.Client.Nom</span>
+              </li>
+              <li class="text-muted">@Model.Client.Adresse</li>
+              <li class="text-muted"><i class="fas fa-phone"></i> @Model.Client.Telephone</li>
+              <li class="text-muted">@Model.Client.Email</li>
+            </ul>
+          </div>
+          <div class="col-xl-4">
+            <p class="text-muted">Facture</p>
+            <ul class="list-unstyled">
+              <li class="text-muted"><span class="fw-bold">ID:</span> @Model.Id</li>
+              <li class="text-muted"><span class="fw-bold">Date:</span> @Model.Date.ToString("dd/MM/yyyy")</li>
+              <li class="text-muted"><span class="fw-bold">Statut:</span>
+                <span class="badge bg-warning text-black fw-bold">Non payé</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row my-2 mx-1 justify-content-center">
+          <table class="table table-striped table-borderless">
+            <thead style="background-color:#84B0CA;" class="text-white">
+              <tr>
+                <th>#</th>
+                <th>Description</th>
+                <th>Quantité</th>
+                <th>Prix Unitaire</th>
+                <th>Montant</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach (var (ligne, index) in Model.Lignes.Select((v, i) => (v, i)))
+              {
+                <tr>
+                  <td>@(index + 1)</td>
+                  <td>@ligne.Produit.Nom</td>
+                  <td>@ligne.Quantite</td>
+                  <td>@ligne.Produit.PrixUnitaire.ToString("C")</td>
+                  <td>@ligne.PrixTotal.ToString("C")</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-8">
+            <p class="ms-3">Merci de votre confiance 🙏</p>
+          </div>
+          <div class="col-xl-3">
+            <ul class="list-unstyled">
+              <li class="text-muted ms-3">
+                <span class="text-black me-4">Sous-total HT</span> @Model.TotalHT.ToString("C")
+              </li>
+              <li class="text-muted ms-3 mt-2">
+                <span class="text-black me-4">TVA (@(Model.Tva*100) %)</span> 
+                @(Model.TotalHT * Model.Tva).ToString("C")
+              </li>
+            </ul>
+            <p class="text-black float-start">
+              <span class="text-black me-3">Total TTC</span>
+              <span style="font-size: 25px;">@Model.TotalTTC.ToString("C")</span>
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,9 @@
+@model FacturationApp.Models.Produit
+<h2>Ajouter Produit</h2>
+<form method="post">
+    <p>Nom: <input asp-for="Nom" /></p>
+    <p>Prix unitaire: <input asp-for="PrixUnitaire" /></p>
+    <p>Stock: <input asp-for="Stock" /></p>
+    <button type="submit">Ajouter</button>
+</form>
+<a href="/Produit/Index">Retour à la liste</a>
